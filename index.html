@@ -11,11 +11,12 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.3/js/uikit.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.3/js/uikit-icons.min.js"></script>
   <script src="main.js"></script>
+  <script src='user.js'></script>
 </head>
 
 <body>
   <header class="uk-padding uk-padding-remove-bottom">
-    <h1>John-Louis' Calorie Counter</h1>
+    <h1 id='user-name-heading'>John-Louis' Calorie Counter</h1>
     <p class="uk-text-meta">CRUD powered calorie tracker to keep track of all the crud you're eating.</p>
   </header>
 
@@ -33,6 +34,9 @@
         </div>
         <div class="uk-margin-small">
           <input class="uk-input" type="number" placeholder="Age (years)" min="1">
+        </div>
+        <div class='uk-margin-small'>
+          <input class='uk-input' type='text' placeholder='Name'>
         </div>
         <button class="uk-button uk-button-default" id='bmr-submit-button'
           uk-tooltip="title: BMR (Basal Metabolic Rate) is the number of calories required to keep your body functioning at rest. This is the amount of calories your body burns even if you did nothing all day.; pos: left">Calculate

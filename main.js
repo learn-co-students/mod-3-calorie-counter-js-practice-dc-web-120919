@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", (e)=> {
     console.log('connected to JS..')
     fetchDatabase();
     document.addEventListener('click', (e)=> clickHandler(e))
-
+    
 });
 
 function clickHandler(event){
@@ -79,13 +79,13 @@ function clickHandler(event){
 
 function calculateBMR(event){
     console.log(event);
-    // debugger;
     let form = event.target.parentElement;
     let weight = parseInt(form.children[1].firstElementChild.value);
     let height = parseInt(form.children[2].firstElementChild.value);
     let age = parseInt(form.children[3].firstElementChild.value);
+    let name = form.children[4].firstElementChild.value;
 
-    console.log(`Weight: ${weight}, Height: ${height}, Age: ${age}`);
+    console.log(`Weight: ${weight}, Height: ${height}, Age: ${age}, Name: ${name}`);
 
     //note: lower range is typically ascribed to women, higher for men 
     //using the Harris-Benedict formula. However, this app will use both as a range
@@ -100,6 +100,9 @@ function calculateBMR(event){
     upperBMR.innerText = upperRange;
     let progressBar = document.getElementById('progress-bar-id');
     progressBar.max = average;
+
+    let userHash = {weight: weight, height: height, age: age, name: name};
+    return userHash;
 }
 
 function updateProgressBar(){
