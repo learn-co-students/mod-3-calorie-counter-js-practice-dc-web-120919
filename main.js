@@ -115,7 +115,7 @@ function updateProgressBar(){
 }
 
 function deleteEntry(mealID){
-    let deletedListItem = document.querySelector(`li[data-id="${1}"]`)
+    let deletedListItem = document.querySelector(`li[data-id="${mealID}"]`)
     console.log(deletedListItem);
     deletedListItem.remove();
 }
