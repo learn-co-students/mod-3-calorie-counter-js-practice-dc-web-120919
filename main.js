@@ -72,6 +72,34 @@ function clickHandler(event){
         editCaloriesField.value = document.querySelector(`strong[data-id="${editID}"]`).innerText;
         editNotesField.value = document.querySelector(`em[data-id="${editID}"]`).innerText;
     }
+    else if(event.target === document.getElementById('bmr-submit-button')){
+        calculateBMR(event);
+    }
+}
+
+function calculateBMR(event){
+    console.log(event);
+    // debugger;
+    let form = event.target.parentElement;
+    let weight = parseInt(form.children[1].firstElementChild.value);
+    let height = parseInt(form.children[2].firstElementChild.value);
+    let age = parseInt(form.children[3].firstElementChild.value);
+
+    console.log(`Weight: ${weight}, Height: ${height}, Age: ${age}`);
+
+    //note: lower range is typically ascribed to women, higher for men 
+    //using the Harris-Benedict formula. However, this app will use both as a range
+    //and will calculate based on average 
+    let lowerRange = parseInt(655 + (4.35*weight) + (4.7*height) - (4.7*age));
+    let upperRange = parseInt(66 + (6.23*weight) + (12.7*height) - (6.8*age));
+    let average = parseInt((lowerRange+upperRange)/2);
+
+    let lowerBMR = document.getElementById('lower-bmr-range');
+    lowerBMR.innerText = lowerRange;
+    let upperBMR = document.getElementById('higher-bmr-range');
+    upperBMR.innerText = upperRange;
+    let progressBar = document.getElementById('progress-bar-id');
+    progressBar.max = average;
 }
 
 function updateProgressBar(){
@@ -92,13 +120,6 @@ function deleteEntry(mealID){
     deletedListItem.remove();
 }
 
-function fetchDatabase(){
-
-    fetch(calorieEntriesDB).then(response => response.json())
-        .then(calorieEntries => calorieEntries.forEach(meal => renderMeal(meal)));
-
-}
-
 function deleteMeal(mealID){
     document.querySelector(`li[data-id="${mealID}"]`).remove();
 }
@@ -109,6 +130,13 @@ function editMeal(meal){
     editedCalories.innerText = meal.calorie;
     editedNote.innerText = meal.note;
     updateProgressBar();
+}
+
+function fetchDatabase(){
+
+    fetch(calorieEntriesDB).then(response => response.json())
+        .then(calorieEntries => calorieEntries.forEach(meal => renderMeal(meal)));
+
 }
 
 function renderMeal(meal){
